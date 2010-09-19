@@ -8,6 +8,7 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+  static hasMany = [oaiJob: OAITask]
 
 	static constraints = {
 		username blank: false, unique: true
