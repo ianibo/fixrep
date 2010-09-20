@@ -1,14 +1,21 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package com.k_int.fixrep
 
 import groovyx.net.http.RESTClient
 import groovy.util.slurpersupport.GPathResult
 import static groovyx.net.http.ContentType.URLENC
 
-class AnalyseController {
-
-    def index = { }
-
-    def save = {
+/**
+ *
+ * @author ibbo
+ */
+class OpenCalaisProcessor {
+  
+	  def save = {
       // println request.getFile("file").inputStream.text
       def metadata = request.getFile("file").inputStream.text
 
@@ -19,22 +26,10 @@ class AnalyseController {
         //contentType: 'application/xml',
         //contentType : groovyx.net.http.ContentType.TEXT,
         contentType : groovyx.net.http.ContentType.TEXT,
-        requestContentType: groovyx.net.http.ContentType.XML,
+        requestContentType: 'application/xml',
         body: metadata)
 
       println("opencalais response ${response.data.text}")
-
-      // twitter.auth.basic userName, passwd
-      // def downloadedfile = request.getFile('file');
-      // downloadedfile.transferTo(new File('c:/somefolder/filename.jpeg'))
-      //if(!f.empty) {
-      //f.transferTo( new File('someotherloc') )
-      //response.sendError(200,'Done');
-      //}
-      //else {
-      // flash.message = 'file cannot be empty'
-      // redirect(action:'uploadForm')
-      //}
-      redirect(action: 'index')
     }
 }
+
