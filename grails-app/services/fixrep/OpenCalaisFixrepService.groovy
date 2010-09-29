@@ -19,12 +19,8 @@ class OpenCalaisFixrepService implements InitializingBean {
       fixrepPluginManagerService.registerPlugin(this)
     }
 
-    def analyise() {
-      println "analyise"
-    }
-
     def extract(text) {
-      def result = [:]
+      def result = ["test1":"test2"]
 
       println "extract"
       // Return a list of extracted term information
@@ -51,10 +47,11 @@ class OpenCalaisFixrepService implements InitializingBean {
         println("Processing description node with type ${it.'rdf:type'.'@rdf:resource'}")
         if ( it.'rdf:type'.'@rdf:resource' == "http://s.opencalais.com/1/type/cat/DocCat" ) {
           println("Got a document category of ${it.'c:category'.'@rdf:resource'} ${it.'c:categoryName'.text()}")
+          result.put("Category",it.'c:categoryName'.text())
         }
       }
 
-      println("Done")
+      println("Done ${result}")
 
       return result
     }
