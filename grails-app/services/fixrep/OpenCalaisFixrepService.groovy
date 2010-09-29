@@ -24,6 +24,8 @@ class OpenCalaisFixrepService implements InitializingBean {
     }
 
     def extract(text) {
+      def result = [:]
+
       println "extract"
       // Return a list of extracted term information
 
@@ -47,10 +49,14 @@ class OpenCalaisFixrepService implements InitializingBean {
 
       opencalais_response.'rdf:Description'.each { 
         println("Processing description node with type ${it.'rdf:type'.'@rdf:resource'}")
+        if ( it.'rdf:type'.'@rdf:resource' == "http://s.opencalais.com/1/type/cat/DocCat" ) {
+          println("Got a document category of ${it.'c:category'.'@rdf:resource'} ${it.'c:categoryName'.text()}")
+        }
       }
 
       println("Done")
-      def result = ['test':'value']
+
+      return result
     }
 
 }
