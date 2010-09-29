@@ -1,16 +1,12 @@
 package com.k_int.fixrep
 
-import groovyx.net.http.RESTClient
-import groovy.util.slurpersupport.GPathResult
-import static groovyx.net.http.ContentType.URLENC
-
 class AnalyseController {
 
     def fixrepPluginManagerService
 
     def index = { }
 
-    def save = {
+    def extract = {
 
       def metadata = request.getFile("file").inputStream.text
 
