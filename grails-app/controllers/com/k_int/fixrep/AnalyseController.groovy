@@ -51,6 +51,7 @@ class AnalyseController {
       //}
       */
 
-      redirect(action: 'index')
+      // redirect(action: 'index')
+      render(view:"extract", model: [metadata: extracted_metadata]);
     }
 }

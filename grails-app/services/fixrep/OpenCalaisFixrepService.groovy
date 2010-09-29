@@ -20,7 +20,7 @@ class OpenCalaisFixrepService implements InitializingBean {
     }
 
     def extract(text) {
-      def result = ["test1":"test2"]
+      def result = []
 
       println "extract"
       // Return a list of extracted term information
@@ -47,7 +47,8 @@ class OpenCalaisFixrepService implements InitializingBean {
         println("Processing description node with type ${it.'rdf:type'.'@rdf:resource'}")
         if ( it.'rdf:type'.'@rdf:resource' == "http://s.opencalais.com/1/type/cat/DocCat" ) {
           println("Got a document category of ${it.'c:category'.'@rdf:resource'} ${it.'c:categoryName'.text()}")
-          result.put("Category",it.'c:categoryName'.text())
+          // result.put("Category",it.'c:categoryName'.text())
+          result.add( new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.'c:categoryName'.text(), termURI: it.'c:category'.'@rdf:resource' ) )
         }
       }
 
