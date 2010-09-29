@@ -46,7 +46,7 @@ class OpenCalaisFixrepService implements InitializingBean {
       println("Finding description elements, root element name is ${opencalais_response.name()}")
 
       opencalais_response.'rdf:Description'.each { 
-        println("Processing description node with type ${it.'rdf:type'}")
+        println("Processing description node with type ${it.'rdf:type'.'@rdf:resource'}")
       }
 
       println("Done")
