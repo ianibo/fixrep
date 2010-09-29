@@ -4,6 +4,11 @@ class BootStrap {
 
     def springSecurityService
 
+    def fixrepPluginManagerService
+    def gateFixrepService
+    def openCalaisFixrepService
+    def termineFixrepService
+
     def init = { servletContext ->
         
         def user_role = Role.findByAuthority('user') ?: new Role(authority: 'user').save()

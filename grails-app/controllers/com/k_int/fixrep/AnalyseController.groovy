@@ -6,14 +6,32 @@ import static groovyx.net.http.ContentType.URLENC
 
 class AnalyseController {
 
+    def fixrepPluginManagerService
+
     def index = { }
 
     def save = {
-      // println request.getFile("file").inputStream.text
+
       def metadata = request.getFile("file").inputStream.text
 
+      fixrepPluginManagerService.reportPlugins()
+
+      // A map of extacted metadata
+      def extracted_metadata = [:]
+
+      fixrepPluginManagerService.registered_plugins.each { plugin, m=extracted_metadata ->
+        println "Processing using plugin ${plugin.code}"
+        m.put("${plugin.code}", plugin.extract(metadata))
+      }
+      
+      println("After all plugins, extracted metadata is : ${extracted_metadata}")
+
+      /*
+      // println request.getFile("file").inputStream.text
+
+      println("Calling opencalais enrich using license ${grailsApplication.config.fixrep.plugins.opencalais.license}")
       def opencalais = new RESTClient('http://api.opencalais.com/tag/rs/enrich')
-      opencalais.headers = [ 'x-calais-licenseID' : '***']
+      opencalais.headers = [ 'x-calais-licenseID' : grailsApplication.config.fixrep.plugins.opencalais.license]
 
       def response = opencalais.post(
         //contentType: 'application/xml',
@@ -35,6 +53,8 @@ class AnalyseController {
       // flash.message = 'file cannot be empty'
       // redirect(action:'uploadForm')
       //}
+      */
+
       redirect(action: 'index')
     }
 }
