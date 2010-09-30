@@ -20,7 +20,8 @@ class OpenCalaisFixrepService implements InitializingBean {
     }
 
     def extract(text) {
-      def result = []
+
+      def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"OpenCalais");
 
       println "extract"
       // Return a list of extracted term information
@@ -41,6 +42,7 @@ class OpenCalaisFixrepService implements InitializingBean {
       // Slurp xml response document - opencalais_response represents the root RDF:rdf element
       def opencalais_response = new XmlSlurper().parseText(response.data.text).declareNamespace(rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#', c: 'http://s.opencalais.com/1/pred/')
 
+
       println("Finding description elements, root element name is ${opencalais_response.name()}")
 
       opencalais_response.'rdf:Description'.each { 
@@ -48,13 +50,14 @@ class OpenCalaisFixrepService implements InitializingBean {
         if ( it.'rdf:type'.'@rdf:resource' == "http://s.opencalais.com/1/type/cat/DocCat" ) {
           println("Got a document category of ${it.'c:category'.'@rdf:resource'} ${it.'c:categoryName'.text()}")
           // result.put("Category",it.'c:categoryName'.text())
-          result.add( new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.'c:categoryName'.text(), termURI: it.'c:category'.'@rdf:resource' ) )
+          def term = new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.'c:categoryName'.text(), termURI: it.'c:category'.'@rdf:resource' )
+          pluginResult.terms.add(term);
         }
       }
 
-      println("Done ${result}")
+      println("Done ${pluginResult}")
 
-      return result
+      return pluginResult
     }
 
 }

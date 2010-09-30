@@ -13,11 +13,11 @@ class AnalyseController {
       fixrepPluginManagerService.reportPlugins()
 
       // A map of extacted metadata
-      def extracted_metadata = [:]
+      def extracted_metadata = []
 
       fixrepPluginManagerService.registered_plugins.each { plugin, m=extracted_metadata ->
         println "Processing using plugin ${plugin.code}"
-        m.put("${plugin.code}", plugin.extract(metadata))
+        m.add(plugin.extract(metadata))
       }
       
       println("After all plugins, extracted metadata is : ${extracted_metadata}")

@@ -1,0 +1,11 @@
+
+
+
+
+ToDo
+
+
+Wikipedia api calls to validate extracted terms...
+
+eg
+view-source:http://en.wikipedia.org/w/api.php?action=opensearch&search=Sheffield&format=xml
