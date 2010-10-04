@@ -27,27 +27,24 @@ class GateFixrepService implements InitializingBean {
     }
 
     def extract(text) {
-      println "extract"
+
+      def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"Fixrep-GATE");
+
       // Return a list of extracted term information
       println("Calling GATE enrich");
       def gateclient = new RESTClient('http://fixrep.k-int.com/fixrepws/extract.xml')
 
       def response = gateclient.post(
-        //contentType: 'application/xml',
-        //contentType : groovyx.net.http.ContentType.TEXT,
-        // contentType : groovyx.net.http.ContentType.TEXT,
-        contentType : groovyx.net.http.ContentType.XML,
+        contentType : groovyx.net.http.ContentType.TEXT,
         requestContentType: groovyx.net.http.ContentType.XML,
         body: text)
 
-      // println("opencalais response ${response.data.text}")
 
       // Slurp xml response document - opencalais_response represents the root RDF:rdf element
       def gate_response = new XmlSlurper().parseText(response.data.text)
 
-      println("response ${gate_response}")
-
-      def result = []
+      println("gatews response \"${gate_response}\"")
+      return pluginResult
     }
 
 }

@@ -23,7 +23,7 @@ class OpenCalaisFixrepService implements InitializingBean {
 
       def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"OpenCalais");
 
-      println "extract"
+      println "extract, oc license: ${grailsApplication.config.fixrep.plugins.opencalais.license}"
       // Return a list of extracted term information
 
       println("Calling opencalais enrich using license ${grailsApplication.config.fixrep.plugins.opencalais.license}")

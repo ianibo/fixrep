@@ -15,6 +15,8 @@ class AnalyseController {
       // A map of extacted metadata
       def extracted_metadata = []
 
+      println("Calling plugins to process text")
+
       fixrepPluginManagerService.registered_plugins.each { plugin, m=extracted_metadata ->
         println "Processing using plugin ${plugin.code}"
         m.add(plugin.extract(metadata))
