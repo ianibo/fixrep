@@ -12,6 +12,7 @@ package com.k_int.fixrep
 class FixRepTerm {
   
   String termSource
+  String termType
   String termString
   String termURI
   String termIdentifier
@@ -19,6 +20,6 @@ class FixRepTerm {
   String termReason // Reason for inclusion if known
   Double termConfidence
 
-  String toString() { "${termSource} ${termString}" }
+  String toString() { "${termSource} ${termType} ${termString}" }
 }
 

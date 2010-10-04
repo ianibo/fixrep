@@ -13,7 +13,7 @@ class GateFixrepService implements InitializingBean {
 
     def grailsApplication
     def fixrepPluginManagerService
-    def code = "Gate"
+    def code = "Fixrep-GATE"
 
 
     void afterPropertiesSet() {
@@ -42,6 +42,13 @@ class GateFixrepService implements InitializingBean {
 
       // Slurp xml response document - opencalais_response represents the root RDF:rdf element
       def gate_response = new XmlSlurper().parseText(response.data.text)
+
+      gate_response.fixrep_result.features.each {
+        def term = new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.feature_value.text(), termType: it.feature_type.text() )
+        println "Adding gate term ${term}"
+        pluginResult.terms.add(term);
+      }
+
 
       println("gatews response \"${gate_response}\"")
       return pluginResult
