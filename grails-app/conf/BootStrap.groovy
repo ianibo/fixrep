@@ -8,6 +8,7 @@ class BootStrap {
     def gateFixrepService
     def openCalaisFixrepService
     def termineFixrepService
+    def edinaExtractService
 
     def init = { servletContext ->
         

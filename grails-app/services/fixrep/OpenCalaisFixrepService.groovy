@@ -50,7 +50,7 @@ class OpenCalaisFixrepService implements InitializingBean {
         if ( it.'rdf:type'.'@rdf:resource' == "http://s.opencalais.com/1/type/cat/DocCat" ) {
           println("Got a document category of ${it.'c:category'.'@rdf:resource'} ${it.'c:categoryName'.text()}")
           // result.put("Category",it.'c:categoryName'.text())
-          def term = new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.'c:categoryName'.text(), termURI: it.'c:category'.'@rdf:resource' )
+          def term = new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.'c:categoryName'.text(), termURI: it.'c:category'.'@rdf:resource', termType: 'category' )
           pluginResult.terms.add(term);
         }
       }
