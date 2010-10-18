@@ -28,7 +28,7 @@ class GateFixrepService implements InitializingBean {
 
     def extract(text) {
 
-      def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"Fixrep-GATE");
+      def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"Fixrep-GATE", status:"OK");
 
       // Return a list of extracted term information
       println("Calling GATE enrich");

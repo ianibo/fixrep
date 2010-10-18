@@ -24,8 +24,9 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
     dependencies {
-      // build 'org.apache.httpcomponents:httpclient:4.0'
-      build 'commons-httpclient:commons-httpclient:3.1'
+      // compile 'org.apache.httpcomponents:httpclient:4.0.3'
+      // compile 'commons-httpclient:commons-httpclient:3.1'
+      compile 'org.apache.httpcomponents:httpmime:4.0.3'
       //      build 'commons-httpclient:commons-httpclient:4.0'
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 

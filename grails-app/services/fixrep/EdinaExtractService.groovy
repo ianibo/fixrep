@@ -8,11 +8,9 @@ import static groovyx.net.http.ContentType.URLENC
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
 import groovyx.net.http.*
-import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity
-import org.apache.commons.httpclient.methods.multipart.Part
-import org.apache.commons.httpclient.methods.multipart.StringPart
-import org.apache.commons.httpclient.methods.multipart.ByteArrayPartSource
-import org.apache.commons.httpclient.methods.multipart.FilePart
+import org.apache.http.entity.mime.*
+import org.apache.http.entity.mime.content.*
+import java.nio.charset.Charset
 
 class EdinaExtractService implements InitializingBean {
 
@@ -38,37 +36,25 @@ class EdinaExtractService implements InitializingBean {
 
     def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"EdinaExtract");
 
-    // Return a list of extracted term information
-    println("Calling EdinaExtract enrich");
-    // def unlockclient = new RESTClient('http://unlock.edina.ac.uk/text/places') // ?format=json&gazetteer=geonames&type=xml')
-    def unlockclient = new HTTPBuilder( 'http://unlock.edina.ac.uk/text/places' )
+    try {
+      // Return a list of extracted term information
+      println("Calling EdinaExtract enrich");
+      // def unlockclient = new RESTClient('http://unlock.edina.ac.uk/text/places') // ?format=json&gazetteer=geonames&type=xml')
+      def unlockclient = new HTTPBuilder( 'http://unlock.edina.ac.uk/text/places' )
 
-    // unlockclient.request(POST) {request -> 
-    //    requestContentType = 'multipart/form-data' 
-
-    //    Part[] parts = [
-    //       new StringPart("format", "json"),
-    //       new StringPart("gazetteer", "geonames"),
-    //       new StringPart("type", "xml"),
-    //       new FilePart("document", new ByteArrayPartSource("document", "bytes".getBytes())) ];
-    
-    //    println "Request params ${request.params}"
-    //    request.entity = new MultipartRequestEntity(parts, new org.apache.commons.httpclient.params.HttpMethodParams())
-    
-    //    response.success = { resp ->
-    //      println "response status: ${resp.statusLine}"
-    //      assert resp.statusLine.statusCode == 200
-    //    }
-    // }
-
-    // def response = unlockclient.post(
-    //   requestContentType: URLENC,
-    //   body: [ 
-    //     format: "json",
-    //     type: "xml",
-    //     gazetteer: "geonames",
-    //     document: "${text}"
-    //   ] )
+      def response = unlockclient.post(
+        requestContentType: URLENC,
+        body: [ 
+          format: "xml",
+          type: "text",
+          gazetteer: "geonames",
+          document: "${text}"
+        ] )
+      }
+      catch ( Exception e ) {
+        pluginResult.status = "Error"
+        pluginResult.message = e.getMessage()
+      }
        
 
       // println("Edina extract response ${response.data.text}")

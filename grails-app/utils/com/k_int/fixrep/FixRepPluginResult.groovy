@@ -12,6 +12,8 @@ package com.k_int.fixrep
 class FixRepPluginResult {
   
   String code
+  String status
+  String message
   List terms = []
 
   def tostring() { "${code} - ${terms}" }
