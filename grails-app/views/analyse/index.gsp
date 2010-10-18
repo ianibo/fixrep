@@ -11,6 +11,8 @@
     <input type="submit"/>
 </g:form>
 
+This is the HTML Interface to the Fixrep service.
+
 </body>
 
 </html>

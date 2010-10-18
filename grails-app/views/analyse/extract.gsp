@@ -6,8 +6,6 @@
 
 <body>
 
--- extract --
-
 <g:form controller="analyse" method="post" action="extract" enctype="multipart/form-data">
     <input type="file" name="file"/>
     <input type="submit"/>
@@ -17,7 +15,7 @@
 <g:each in="${metadata}" var="pluginResult">
    <li>
      <ul>
-       <b>${pluginResult.code}: ${pluginResult.status} ${pluginResult.message}</b><br/>
+       <b>${pluginResult.code}: ${pluginResult.status} ${pluginResult.message} in ${pluginResult.elapsed} ms</b><br/>
        <g:each in="${pluginResult.terms}" var="termInfo">
          <li>
            ${termInfo}

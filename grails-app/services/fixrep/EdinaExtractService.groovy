@@ -34,6 +34,8 @@ class EdinaExtractService implements InitializingBean {
 
     def extract(text) {
 
+    Long start_time = System.currentTimeMillis();
+
     def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"EdinaExtract");
 
     try {
@@ -54,6 +56,9 @@ class EdinaExtractService implements InitializingBean {
       catch ( Exception e ) {
         pluginResult.status = "Error"
         pluginResult.message = e.getMessage()
+      }
+      finally {
+        pluginResult.elapsed = System.currentTimeMillis() - start_time;
       }
        
 

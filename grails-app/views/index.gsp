@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Welcome to Grails</title>
+        <title>FixRep Aggregated Extraction Service - </title>
         <meta name="layout" content="main" />
         <style type="text/css" media="screen">
 
@@ -51,50 +51,22 @@
         </style>
     </head>
     <body>
-        <div id="nav">
-            <div class="homePagePanel">
-                <div class="panelTop"></div>
-                <div class="panelBody">
-                    <h1>Application Status</h1>
-                    <ul>
-                        <li>App version: <g:meta name="app.version"></g:meta></li>
-                        <li>Grails version: <g:meta name="app.grails.version"></g:meta></li>
-                        <li>Groovy version: ${org.codehaus.groovy.runtime.InvokerHelper.getVersion()}</li>
-                        <li>JVM version: ${System.getProperty('java.version')}</li>
-                        <li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-                        <li>Domains: ${grailsApplication.domainClasses.size()}</li>
-                        <li>Services: ${grailsApplication.serviceClasses.size()}</li>
-                        <li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-                    </ul>
-                    <h1>Installed Plugins</h1>
-                    <ul>
-                        <g:set var="pluginManager"
-                               value="${applicationContext.getBean('pluginManager')}"></g:set>
-
-                        <g:each var="plugin" in="${pluginManager.allPlugins}">
-                            <li>${plugin.name} - ${plugin.version}</li>
-                        </g:each>
-
-                    </ul>
-                </div>
-                <div class="panelBtm"></div>
-            </div>
-        </div>
         <div id="pageBody">
-            <h1>Welcome to Grails</h1>
-            <p>Congratulations, you have successfully started your first Grails application! At the moment
-            this is the default page, feel free to modify it to either redirect to a controller or display whatever
-            content you may choose. Below is a list of controllers that are currently deployed in this application,
-            click on each to execute its default action:</p>
+            <h1>Welcome to the Fixrep Aggregated Extraction Service</h1>
+            <p>This web service is an experimental addon which extends the Spatial and Temporal extraction service produced for WP4 of the JISC Funded <a href="http://www.ukoln.ac.uk/projects/fixrep/">FixRep</a> project.
+               That workpackage developed <a href="http://fixrep.k-int.com/fixrepws">this web service</a> which can be used to extract 
+               Temporal and Spatial named entities from input xml documents. This service encapsulates that original service in an
+               extensible pluggable framework that is intended to both assist in the evaluation of different metadata extraction services,
+               and to provide a unified interface to such a set of services.</p><br/>
+            <p>
+               The basic service can be accessed by making a HTTP multipart post to http://localhost:8080/fixrep/analyse/extract.[html|xml|json] A simple html form is provided at 
+               <a href="http://fixrep.k-int.com/fixrep/analyse">http://fixrep.k-int.com/fixrep/analyse</a> which will report back extracted terms in a html response.
+            </p>
 
-            <div id="controllerList" class="dialog">
-                <h2>Available Controllers:</h2>
-                <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-                    </g:each>
-                </ul>
-            </div>
+            <p>
+              Comments / Queries / Suggestions can be emailed to <b>fixrep at k hypen int dot com</b>
+            </p>
+
         </div>
     </body>
 </html>

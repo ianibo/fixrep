@@ -28,29 +28,37 @@ class GateFixrepService implements InitializingBean {
 
     def extract(text) {
 
+      Long start_time = System.currentTimeMillis();
+
       def pluginResult = new com.k_int.fixrep.FixRepPluginResult(code:"Fixrep-GATE", status:"OK");
 
-      // Return a list of extracted term information
-      println("Calling GATE enrich");
-      def gateclient = new RESTClient('http://fixrep.k-int.com/fixrepws/extract.xml')
+      try {
 
-      def response = gateclient.post(
-        contentType : groovyx.net.http.ContentType.TEXT,
-        requestContentType: groovyx.net.http.ContentType.XML,
-        body: text)
+        // Return a list of extracted term information
+        println("Calling GATE enrich");
+        def gateclient = new RESTClient('http://fixrep.k-int.com/fixrepws/extract.xml')
+
+        def response = gateclient.post(
+          contentType : groovyx.net.http.ContentType.TEXT,
+          requestContentType: groovyx.net.http.ContentType.XML,
+          body: text)
 
 
-      // Slurp xml response document - opencalais_response represents the root RDF:rdf element
-      def gate_response = new XmlSlurper().parseText(response.data.text)
+        // Slurp xml response document - opencalais_response represents the root RDF:rdf element
+        def gate_response = new XmlSlurper().parseText(response.data.text)
 
-      gate_response.fixrep_result.features.each {
-        def term = new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.feature_value.text(), termType: it.feature_type.text() )
-        println "Adding gate term ${term}"
-        pluginResult.terms.add(term);
+        gate_response.fixrep_result.features.each {
+          def term = new com.k_int.fixrep.FixRepTerm( termSource: code, termString: it.feature_value.text(), termType: it.feature_type.text() )
+          println "Adding gate term ${term}"
+          pluginResult.terms.add(term);
+        }
+        println("gatews response \"${gate_response}\"")
+      }
+      finally {
+        pluginResult.elapsed = System.currentTimeMillis() - start_time;
       }
 
 
-      println("gatews response \"${gate_response}\"")
       return pluginResult
     }
 

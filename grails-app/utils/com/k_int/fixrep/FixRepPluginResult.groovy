@@ -14,6 +14,7 @@ class FixRepPluginResult {
   String code
   String status
   String message
+  Long elapsed
   List terms = []
 
   def tostring() { "${code} - ${terms}" }
