@@ -23,6 +23,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
     }
+
     dependencies {
       // compile 'org.apache.httpcomponents:httpclient:4.0.3'
       // compile 'commons-httpclient:commons-httpclient:3.1'
@@ -32,4 +33,18 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.5'
     }
+
+    plugins {
+        runtime ":hibernate:$grailsVersion"
+        runtime ":resources:1.2.RC2"
+        runtime ':fields:1.2'
+
+        // Uncomment these (or add new ones) to enable additional resources capabilities
+        //runtime ":zipped-resources:1.0"
+        //runtime ":cached-resources:1.0"
+        //runtime ":yui-minify-resources:0.1.4"
+
+        build ":tomcat:$grailsVersion"
+    }
+
 }
